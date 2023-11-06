@@ -68,7 +68,7 @@
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  #opacity: 1.0
+  #  opacity: 0.9
 
   # Startup Mode (changes require restart)
   #
@@ -916,7 +916,7 @@ window:
   class:
     instance: Alacritty
     general: Alacritty
-  opacity: 0.5
+  opacity: 1.0
   dynamic_title: true
 
 scrolling:
@@ -933,7 +933,7 @@ shell:
 colors:
   # Default colors
   primary:
-    background: '0x2E3440'
+    background: '0x202124' 
     foreground: '0xD8DEE9'
 
   # Normal colors
