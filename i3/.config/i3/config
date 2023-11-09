@@ -9,7 +9,7 @@ font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
 
 exec_always picom -b
-exec_always feh --bg-scale $HOME/.dotfiles/i3/wp.jpg
+exec_always feh --bg-center .dotfiles/i3/wp.jpg .dotfiles/i3/brs.jpg
 exec --no-startup-id redshift
 
 # Start XDG autostart .desktop files using dex. See also
@@ -26,6 +26,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+# Use xrandr for multihead layout
+exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -207,4 +210,5 @@ client.urgent			$urgent-bg-color	$urgent-bg-color	$text-color		#00ff00
 # finds out, if available)
 bar {
         status_command i3status
+	tray_output primary
 }
