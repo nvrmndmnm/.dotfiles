@@ -1,4 +1,3 @@
 remove Mod1 = Alt_R
-keycode 108 = None
 keycode 108 = BackSpace
 remove Mod1 = BackSpace
