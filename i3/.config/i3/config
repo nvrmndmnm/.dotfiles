@@ -30,6 +30,10 @@ exec --no-startup-id nm-applet
 # Use xrandr for multihead layout
 exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
 
+# Switch between layouts
+bindsym $mod+o exec xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
+bindsym $mod+i exec xrandr --output eDP-1 --auto --primary
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
