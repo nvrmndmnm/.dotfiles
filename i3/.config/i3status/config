@@ -19,12 +19,12 @@ order += "memory"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "W:%quality"
+        format_up = "W"
         format_down = "W: down"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip (%speed)"
+        format_up = "E: %ip"
         format_down = ""
 }
 
@@ -49,5 +49,5 @@ memory {
 }
 
 tztime local {
-        format = "%w%d %H%M"
+        format = "%w%d%H%M"
 }
