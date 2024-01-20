@@ -31,7 +31,7 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
 
 # Switch between layouts
-bindsym $mod+o exec xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
+bindsym $mod+o exec python ~/.config/i3/scripts/monitor-switcher.py
 bindsym $mod+i exec xrandr --output eDP-1 --auto --primary
 
 # Use pactl to adjust volume in PulseAudio.
