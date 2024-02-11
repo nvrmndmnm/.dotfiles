@@ -1,6 +1,6 @@
 ---
 - name: "FZF | Uninstall fzf"
-  pacman:
+  community.general.pacman:
     name: fzf
     state: absent
   become: true
