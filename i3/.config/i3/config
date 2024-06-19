@@ -10,7 +10,7 @@ font pango:monospace 8
 
 exec_always picom -b
 exec_always feh --bg-center .dotfiles/i3/wp.jpg .dotfiles/i3/brs.jpg
-exec_always --no-startup-id redshift
+#exec_always --no-startup-id redshift
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
