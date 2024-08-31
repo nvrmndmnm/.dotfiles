@@ -1,13 +1,6 @@
 ---
-- name: "FZF | Uninstall fzf"
-  community.general.pacman:
-    name: fzf
-    state: absent
-  become: true
-
 - name: "FZF | Clone Latest Version"
-  ansible.builtin.git:
-    repo: https://github.com/junegunn/fzf.git
-    depth: 1
-    dest: "{{ ansible_user_dir }}/.fzf"
-  notify: "Install FZF"
+  pacman:
+    name: fzf
+    state: present
+  become: true
