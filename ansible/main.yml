@@ -1,7 +1,6 @@
 ---
-- name: DotFiles Config
-  hosts: localhost
-  connection: local
+- name: Dotfiles Config
+  hosts: zero
 
   pre_tasks:
     - name: Detect Host User
