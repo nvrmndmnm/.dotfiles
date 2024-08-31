@@ -98,7 +98,7 @@ _symbol = {
     "arrow_right": to_text("➞"),
     "skip": to_text("⤼"),
     "flag": to_text("⚑"),
-}  # type: Dict[str,str]
+}  # type: dict[str,str]
 """:obj:`dict` of :obj:`str` to :obj:`str`: A dictionary of symbols to be used
 when the Callback needs to display a symbol on the screen.
 """
@@ -113,7 +113,7 @@ _session_title = {
     "changed": "Environment changed",
     "_ansible_no_log": "Omit logs",
     "use_stderr": "Use STDERR to output",
-}  # type: Dict[str,str]
+}  # type: dict[str,str]
 """:obj:`dict` of :obj:`str` to :obj:`str`: A dictionary of terms used as
 section title when displayin the output of a command.
 """
@@ -182,7 +182,7 @@ def iscollection(obj):
     Returns:
         bool: True if the object is a collection and False otherwise.
     """
-    return isinstance(obj, Sequence) and not isinstance(obj, basestring)
+    return isinstance(obj, Sequence) and not isinstance(obj, str)
 
 
 def stringtruncate(
