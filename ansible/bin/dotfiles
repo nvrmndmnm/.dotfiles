@@ -107,33 +107,34 @@ if ! pacman -Qi python >/dev/null 2>&1; then
     _cmd "sudo pacman -S python"
 fi
 # Check if pip is installed
-if ! pacman -Qi python-pip >/dev/null 2>&1; then
-    _task "Installing Python Pip"
-    _cmd "sudo pacman -S python-pip"
-fi
-# Check if pip module watchdog is installed
-if ! pip list | grep watchdog >/dev/null 2>&1; then
-    _task "Installing Python Watchdog"
-    _cmd "pip install watchdog"
-fi
+# if ! pacman -Qi python-pip >/dev/null 2>&1; then
+#     _task "Installing Python Pip"
+#     _cmd "sudo pacman -S python-pip"
+# fi
+# # Check if pip module watchdog is installed
+# if ! pip list | grep watchdog >/dev/null 2>&1; then
+#     _task "Installing Python Watchdog"
+#     _cmd "pip install watchdog"
+# fi
 
 # Generate SSH keys
-if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
-    _task "Generating SSH keys"
-    _cmd "mkdir -p $SSH_DIR"
-    _cmd "chmod 700 $SSH_DIR"
-    _cmd "ssh-keygen -t ed25519 -f $SSH_DIR/id_ed25519 -N '' -C $USER@$HOSTNAME"
-    _cmd "cat $SSH_DIR/id_ed25519.pub >> $SSH_DIR/authorized_keys"
-fi
+# if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
+#     echo "$SSH_DIR/
+#     _task "Generating SSH keys"
+#     _cmd "mkdir -p $SSH_DIR"
+#     _cmd "chmod 700 $SSH_DIR"
+#     _cmd "ssh-keygen -t ed25519 -f $SSH_DIR/id_ed25519 -N '' -C $USER@$HOSTNAME"
+#     _cmd "cat $SSH_DIR/id_ed25519.pub >> $SSH_DIR/authorized_keys"
+# fi
 
 # Clone repository
-if ! [[ -d "$DOTFILES_DIR" ]]; then
-    _task "Cloning repository"
-    _cmd "git clone --quiet https://github.com/nvrmndmnm/.dotfiles.git $DOTFILES_DIR"
-else
-    _task "Updating repository"
-    _cmd "git -C $DOTFILES_DIR pull --quiet"
-fi
+# if ! [[ -d "$DOTFILES_DIR" ]]; then
+#     _task "Cloning repository"
+#     _cmd "git clone --quiet https://github.com/nvrmndmnm/.dotfiles.git $DOTFILES_DIR"
+# else
+#     _task "Updating repository"
+#     _cmd "git -C $DOTFILES_DIR pull --quiet"
+# fi
 
 # pushd "$DOTFILES_DIR" 2>&1 >/dev/null
 # _task "Updating Galaxy"
@@ -144,7 +145,7 @@ _task_done
 if [[ -f $VAULT_SECRET ]]; then
     ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@"
 else
-    ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+    ansible-playbook -i "inventory/hosts.yml" "$DOTFILES_DIR/ansible/main.yml" -K "$@"
 fi
 
 # popd 2>&1 >/dev/null
