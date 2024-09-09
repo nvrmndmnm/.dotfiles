@@ -1,3 +1,5 @@
-
+export EDITOR="nvim"
+export GOROOT="/usr/lib/go"
+export GOPATH="/home/$USER/go"
 export PATH="$PATH:/home/$USER/.foundry/bin"
 export PATH="$PATH:/home/$USER/go/bin"

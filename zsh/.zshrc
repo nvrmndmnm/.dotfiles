@@ -93,7 +93,3 @@ alias ls='ls --color'
 # eval
 eval "$(fzf --zsh)"
 
-# go env
-export GOROOT='/usr/lib/go'
-export GOPATH='/home/'$USER'/go'
-
