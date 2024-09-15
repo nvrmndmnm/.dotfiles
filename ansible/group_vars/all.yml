@@ -1,6 +1,8 @@
-default_roles:
-  - fzf
+dotfiles_dir: "{{ ansible_facts['user_dir'] }}/.dotfiles"
 
+default_roles:
+  # - fzf
+  - neovim
 
 git_user_name: "nvrmndmnm"
 git_user_email: !vault |
