@@ -1,6 +1,6 @@
 ---
 - name: dotfiles config
-  hosts: battlestations:localhost
+  hosts: battlestations
 
   pre_tasks:
     - name: detect host user
