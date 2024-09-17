@@ -1,6 +1,6 @@
 ---
 - name: "tmux | {{ ansible_distribution }} | Install tmux"
-  community.general.pacman:
+  pacman:
     name: tmux
     state: present
   become: true

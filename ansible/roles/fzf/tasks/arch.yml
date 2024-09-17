@@ -1,5 +1,5 @@
 ---
-- name: "FZF | Clone Latest Version"
+- name: "FZF | install latest version"
   pacman:
     name: fzf
     state: present
