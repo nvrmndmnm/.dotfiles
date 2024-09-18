@@ -14,6 +14,7 @@
         src: "."
         dest: "{{ dotfiles_dir }}"
         mode: push
+        delete: true
       when: inventory_hostname != 'localhost'
 
     - name: set roles
