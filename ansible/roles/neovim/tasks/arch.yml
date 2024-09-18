@@ -1,1 +1,6 @@
 ---
+- name: "nvim | install latest version"
+  pacman:
+    name: neovim
+    state: present
+  become: true

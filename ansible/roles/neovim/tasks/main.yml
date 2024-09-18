@@ -1,4 +1,23 @@
 ---
-- name: Run Arch Tasks
-  ansible.builtin.import_tasks: arch.yml
-  when: ansible_os_family == 'Archlinux'
+- name: run arch tasks
+  import_tasks: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+- name: nvim | set config path
+  set_fact: 
+     config_path: "{{ ansible_facts['user_dir'] }}/.config/nvim"
+
+- name: nvim | check existing configs
+  stat:
+    path: "{{ config_path }}"
+  register: old_config
+
+- name: nvim | backup old configs
+  command: mv {{ config_path }} {{ config_path }}.old
+  when: old_config.stat.isdir | default(false)
+
+- name: nvim | create config symlinks 
+  file:
+    src: "{{ role_path | replace(control_home_path, managed_home_path) }}/files"
+    dest: "{{ config_path }}"
+    state: link
