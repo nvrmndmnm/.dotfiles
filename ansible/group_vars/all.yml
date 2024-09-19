@@ -3,6 +3,7 @@ control_home_path: "{{ lookup('env', 'HOME') }}"
 managed_home_path: "{{ ansible_facts['user_dir']  }}"
 
 default_roles:
+  - alacritty
   # - fzf
   - neovim
 
