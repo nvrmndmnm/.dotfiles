@@ -1,6 +1,0 @@
----
-- name: "tmux | {{ ansible_distribution }} | Install tmux"
-  pacman:
-    name: tmux
-    state: present
-  become: true
