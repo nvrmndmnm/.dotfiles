@@ -1,0 +1,12 @@
+---
+- name: install latest version with pacman
+  pacman:
+    name: "{{ package_name }}"
+    state: present
+  become: true
+  when: ansible_os_family == "Archlinux" and medium == "pacman"
+
+- name: install latest version with yay
+  command:
+    cmd: "yay -S --noconfirm {{ package_name }}"
+  when: ansible_os_family == "Archlinux" and medium == "yay"
