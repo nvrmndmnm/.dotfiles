@@ -1,14 +1,12 @@
 ---
-- name: "{{ role_name }} | install latest version"
-  pacman:
-    name: alacritty
-    state: present
-  become: true
-  when: ansible_os_family == "Archlinux"
+- name: set role vars
+  set_fact:
+    package_name: alacritty
+    medium: pacman
+    config_path: "{{ ansible_facts['user_dir'] }}/.config/alacritty"
 
-- name: "{{ role_name }}  | set config path"
-  set_fact: 
-     config_path: "{{ ansible_facts['user_dir'] }}/.config/alacritty"
+- name: install package
+  include_tasks: ../../../install_package.yml
 
 - name: set config
   include_tasks: ../../../set_config.yml
