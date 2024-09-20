@@ -1,15 +1,46 @@
 ---
-- name: check existing configs
-  stat:
-    path: "{{ config_path }}"
-  register: old_config
+- name: setup paths
+  set_fact:
+    ansible_files_path: "{{ role_path | replace(control_home_path, managed_home_path) }}/files"
 
-- name: backup old configs
-  command: mv {{ config_path }} {{ config_path }}.old
-  when: old_config.stat.isdir | default(false)
+- name: list config files
+  find:
+    path: "{{ ansible_files_path }}"
+    recurse: true
+    hidden: true
+  register: config_list
+
+- name: backup config files
+  block:
+  - name: check existing files
+    stat:
+      path: "{{ item.path | replace(ansible_files_path, config_path) }}"
+    loop: "{{ config_list.files }}"
+    loop_control:
+      label: "{{ item.path }}"
+    register: old_config
+
+  - name: move old files
+    command: mv {{ item.stat.path }} {{ item.stat.path }}.old
+    loop: "{{ old_config.results }}"
+    loop_control:
+      label: "{{ item.invocation.module_args.path }}"
+    when: item.stat.isreg | default(false)
+  when: config_list.files | length > 0
+
+- name: create directory structure
+  file:
+    path: "{{ item.path | replace(ansible_files_path, config_path) | dirname }}" 
+    state: directory
+  loop: "{{ config_list.files }}"
+  loop_control:
+    label: "{{ item.path | replace(ansible_files_path, config_path) | dirname }}" 
 
 - name: create config symlinks
   file:
-    src: "{{ role_path | replace(control_home_path, managed_home_path) }}/files"
-    dest: "{{ config_path }}"
+    src: "{{ item.path }}"
+    dest: "{{ item.path | replace(ansible_files_path, config_path) }}"
     state: link
+  loop: "{{ config_list.files }}"
+  loop_control:
+    label: "{{ item.path | replace(ansible_files_path, config_path) }}" 
