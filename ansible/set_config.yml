@@ -1,14 +1,14 @@
 ---
-- name: "{{ role_name }} | check existing configs"
+- name: check existing configs
   stat:
     path: "{{ config_path }}"
   register: old_config
 
-- name: "{{ role_name }}  | backup old configs"
+- name: backup old configs
   command: mv {{ config_path }} {{ config_path }}.old
   when: old_config.stat.isdir | default(false)
 
-- name: "{{ role_name }} | create config symlinks"
+- name: create config symlinks
   file:
     src: "{{ role_path | replace(control_home_path, managed_home_path) }}/files"
     dest: "{{ config_path }}"
