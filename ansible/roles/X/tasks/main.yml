@@ -1,0 +1,7 @@
+---
+- name: set role vars
+  set_fact:
+    config_path: "{{ ansible_facts['user_dir'] }}"
+
+- name: set config
+  include_tasks: ../../../set_config.yml
