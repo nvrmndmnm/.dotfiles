@@ -12,10 +12,10 @@
     - name: copy configs to remote
       synchronize:
         src: "."
-        dest: "{{ dotfiles_dir }}"
+        dest: "{{ managed_home_path }}"
         mode: push
         delete: true
-      when: inventory_hostname != 'localhost'
+      when: "ansible_connection != 'local'"
       tags: always
 
     - name: set roles

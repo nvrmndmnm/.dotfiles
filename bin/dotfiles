@@ -145,7 +145,7 @@ _task_done
 if [[ -f $VAULT_SECRET ]]; then
     ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@"
 else
-    ansible-playbook -i "inventory/hosts.yml" "$DOTFILES_DIR/ansible/main.yml" "$@"
+    ansible-playbook -i "inventory/hosts.yml" "$DOTFILES_DIR/main.yml" "$@"
 fi
 
 # popd 2>&1 >/dev/null
