@@ -16,18 +16,17 @@
         mode: push
         delete: true
       when: inventory_hostname != 'localhost'
+      tags: always
 
     - name: set roles
       ansible.builtin.set_fact:
         run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles | difference(exclude_roles | default([])) }}"
-      tags:
-        - always
+      tags: always
 
     - name: display roles
       ansible.builtin.debug:
         var: run_roles
-      tags:
-        - always
+      tags: always
 
     - name: run roles
       ansible.builtin.include_role:
@@ -38,5 +37,4 @@
       loop_control:
         loop_var: roles_item
       with_items: "{{ run_roles }}"
-      tags:
-        - always
+      tags: always
