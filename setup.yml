@@ -1,23 +1,26 @@
-- name: Setup Arch Linux
-  hosts: local
+- name: setup arch linux
+  hosts: battlestations
   become: yes
   tasks:
-    - name: Update system
+    - name: update system
       pacman:
         update_cache: yes
         upgrade: yes
 
-    - name: Install essential packages
+    - name: install essential packages
       pacman:
         name:
           - base-devel
           - git
-          - vim
-          - yay
-          - zsh
         state: present
 
-    - name: Change default shell to zsh
+    - name: install fonts
+      pacman:
+        name:
+          - noto-fonts
+          - ttf-jetbrains-mono-nerd
+
+    - name: change default shell to zsh
       user:
         name: "{{ ansible_user }}"
         shell: /usr/bin/zsh
