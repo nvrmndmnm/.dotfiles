@@ -1,0 +1,14 @@
+#!/bin/bash
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+xset r rate 333 25
