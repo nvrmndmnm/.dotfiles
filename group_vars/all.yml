@@ -14,6 +14,12 @@ default_roles:
   - X
   - zsh
 
+system_roles:
+  - sys
+
+vault_roles:
+  - ssh
+
 git_user_name: "nvrmndmnm"
 git_user_email: !vault |
     $ANSIBLE_VAULT;1.1;AES256
