@@ -1,0 +1,32 @@
+dotfiles_dir: "{{ ansible_facts['user_dir'] }}/.dotfiles"
+control_home_path: "{{ lookup('env', 'HOME') }}"
+managed_home_path: "{{ ansible_facts['user_dir'] }}"
+
+default_roles:
+  - alacritty
+  - fzf
+  - i3-wm
+  - neovim
+  - picom
+  - redshift
+  - rofi
+  - tmux
+  - wireguard
+  - X
+  - zsh
+
+system_roles:
+  - sys
+
+vault_roles:
+  - ssh
+
+git_user_name: "nvrmndmnm"
+git_user_email: "{{ vault_user_email }}"
+
+aero_user: "{{ vault_aero_user }}"
+nero_user: "{{ vault_nero_user }}"
+zero_user: "{{ vault_zero_user }}"
+darlene_user: "{{ vault_darlene_user }}" 
+lorraine_user: "{{ vault_lorraine_user }}"
+roxanne_user: "{{ vault_roxanne_user }}"
