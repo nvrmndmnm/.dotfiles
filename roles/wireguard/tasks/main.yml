@@ -4,11 +4,14 @@
     package_name: wireguard-tools 
     medium: pacman
     config_path: "/etc/wireguard"
+    dir_mode: "0700"
+    files_mode: "0600"
 
 - name: install package
   include_tasks: ../../../install_package.yml
 
 - name: set config
-  set_fact:
-    config_file:
   include_tasks: ../../../set_config.yml
+  args:
+    apply:
+      become: yes
