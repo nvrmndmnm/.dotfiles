@@ -10,12 +10,20 @@
     hidden: true
   register: config_list
 
+- name: filter host-specific config files
+  set_fact:
+    filtered_config_files: >-
+      {{
+        config_list.files | selectattr('path', 'search', '/common/')
+        + config_list.files | selectattr('path', 'search', '/' + inventory_hostname + '/')
+      }}
+
 - name: backup config files
   block:
   - name: check existing files
     stat:
-      path: "{{ item.path | replace(ansible_files_path, config_path) }}"
-    loop: "{{ config_list.files }}"
+      path: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+    loop: "{{ filtered_config_files }}"
     loop_control:
       label: "{{ item.path }}"
     register: old_config
@@ -26,21 +34,33 @@
     loop_control:
       label: "{{ item.invocation.module_args.path }}"
     when: item.stat.isreg | default(false)
-  when: config_list.files | length > 0
+  when: filtered_config_files | length > 0
 
 - name: create directory structure
   file:
-    path: "{{ item.path | replace(ansible_files_path, config_path) | dirname }}" 
+    path: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) | dirname }}" 
     state: directory
-  loop: "{{ config_list.files }}"
+    mode: "{{ dir_mode | default('0755')}}"
+  loop: "{{ filtered_config_files }}"
   loop_control:
-    label: "{{ item.path | replace(ansible_files_path, config_path) | dirname }}" 
+    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) | dirname }}" 
 
 - name: create config symlinks
   file:
     src: "{{ item.path }}"
-    dest: "{{ item.path | replace(ansible_files_path, config_path) }}"
+    dest: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
     state: link
-  loop: "{{ config_list.files }}"
+  loop: "{{ filtered_config_files }}"
   loop_control:
-    label: "{{ item.path | replace(ansible_files_path, config_path) }}" 
+    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}" 
+  when: config_path is search(ansible_facts['user_dir'])
+
+- name: copy config files
+  copy:
+    src: "{{ item.path | replace(managed_home_path, control_home_path) }}"
+    dest: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+    mode: "{{ files_mode | default('0644') }}"
+  loop: "{{ filtered_config_files }}"
+  loop_control:
+    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}" 
+  when: config_path is not search(ansible_facts['user_dir'])
