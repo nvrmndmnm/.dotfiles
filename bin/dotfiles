@@ -140,22 +140,22 @@ fi
 # _cmd "ansible-galaxy install -r requirements.yml"
 
 PLAYBOOK="main.yml"
-while getopts ":s" opt; do
-    case $opt in
-    s)
-        PLAYBOOK="setup.yml"
-        shift $((OPTIND - 1))
-        ;;
-    \*)
+# while getopts ":s" opt; do
+#     case $opt in
+#     s)
+#         PLAYBOOK="setup.yml"
+#         shift $((OPTIND - 1))
+#         ;;
+#     \*)
 
-        ;;
-    esac
-done
+#         ;;
+#     esac
+# done
 
 _task "Running playbook"
 _task_done
 if [[ -f $VAULT_SECRET ]]; then
-    ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/$PLAYBOOK" "$@"
+    ansible-playbook --vault-password-file $VAULT_SECRET -i "inventory/hosts.yml" "$DOTFILES_DIR/$PLAYBOOK" "$@"
 else
     ansible-playbook -i "inventory/hosts.yml" "$DOTFILES_DIR/$PLAYBOOK" "$@"
 fi
