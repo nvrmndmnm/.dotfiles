@@ -6,7 +6,28 @@
   become: true
   when: ansible_os_family == "Archlinux" and medium == "pacman"
 
-- name: install latest version with yay
-  command:
-    cmd: "yay -S --noconfirm {{ package_name }}"
-  when: ansible_os_family == "Archlinux" and medium == "yay"
+- name: install latest version from AUR
+  block:
+    - name: clone package repo
+      git:
+        repo: "https://aur.archlinux.org/{{ package_name }}.git"
+        dest: "/tmp/{{ package_name }}"
+        update: true
+    
+    - name: build package
+      command: makepkg -s -f --noconfirm
+      args:
+        chdir: "/tmp/{{ package_name }}"
+    
+    - name: find the built package
+      find:
+        path: "/tmp/{{ package_name }}"
+        pattern: "*.pkg.tar.zst"
+      register: built_package
+      
+    - name: install package
+      pacman:
+        name: "{{ built_package.files[0].path }}"
+        state: present
+      become: true
+  when: ansible_os_family == "Archlinux" and medium == "aur"
