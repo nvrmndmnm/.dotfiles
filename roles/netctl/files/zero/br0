@@ -1,0 +1,5 @@
+Description="Bridge"
+Interface=br0
+Connection=bridge
+BindsToInterfaces=(enp0s31f6)
+IP=dhcp

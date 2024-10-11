@@ -1,0 +1,4 @@
+Description='Primary ethernet'
+Interface=br0
+Connection=ethernet
+IP=no

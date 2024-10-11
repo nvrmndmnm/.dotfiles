@@ -1,0 +1,4 @@
+Description='ethernet'
+Interface=enp3s0
+Connection=ethernet
+IP=dhcp
