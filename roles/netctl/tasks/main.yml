@@ -4,7 +4,7 @@
     package_name: netctl
     medium: pacman
     config_path: "/etc/netctl"
-    dir_mode: "0700"
+    dir_mode: "0755"
     files_mode: "0600"
     
 - name: install package
