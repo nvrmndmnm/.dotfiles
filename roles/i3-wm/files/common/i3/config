@@ -63,7 +63,7 @@ bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/type-6/powermenu.sh
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # take a screenshot
-bindsym $mod+Shift+s exec flameshot gui --clipboard
+bindsym $mod+Shift+s exec flameshot gui
 
 # change focus
 bindsym $mod+h focus left
