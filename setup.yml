@@ -12,6 +12,7 @@
         name:
           - base-devel
           - git
+          - rsync
         state: present
 
     - name: install fonts
