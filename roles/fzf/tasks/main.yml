@@ -1,0 +1,8 @@
+---
+- name: set role vars
+  set_fact:
+    package_name: fzf
+    medium: pacman
+
+- name: install package
+  include_tasks: ../../../install_package.yml
