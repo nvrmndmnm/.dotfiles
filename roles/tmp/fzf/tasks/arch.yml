@@ -1,6 +1,0 @@
----
-- name: "FZF | install latest version"
-  pacman:
-    name: fzf
-    state: present
-  become: true
