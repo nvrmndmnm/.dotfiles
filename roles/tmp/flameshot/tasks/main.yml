@@ -1,4 +1,0 @@
----
-- name: Run Arch Tasks
-  ansible.builtin.import_tasks: arch.yml
-  when: ansible_os_family == 'Archlinux'
