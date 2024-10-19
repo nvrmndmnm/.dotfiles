@@ -1,7 +1,7 @@
 ---
 - name: set role vars
   set_fact:
-    package_name: telegram-desktop 
+    package_name: telegram-desktop
     medium: pacman
 
 - name: install package
