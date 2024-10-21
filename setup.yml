@@ -11,6 +11,7 @@
       pacman:
         name:
           - base-devel
+          - dkms
           - git
           - rsync
         state: present
