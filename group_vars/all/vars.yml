@@ -41,8 +41,11 @@ git_user_name: "nvrmndmnm"
 git_user_email: "{{ vault_user_email }}"
 
 aero_user: "{{ vault_aero_user }}"
+aero_password: "{{ vault_aero_password }}"
 nero_user: "{{ vault_nero_user }}"
 zero_user: "{{ vault_zero_user }}"
+zero_password: "{{ vault_zero_password }}"
+
 darlene_user: "{{ vault_darlene_user }}" 
 lorraine_user: "{{ vault_lorraine_user }}"
 roxanne_user: "{{ vault_roxanne_user }}"
