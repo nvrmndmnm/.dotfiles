@@ -1,33 +1,54 @@
 ---
 - name: install latest version with pacman
+  when: ansible_os_family == "Archlinux" and medium == "pacman"
   pacman:
     name: "{{ package_name }}"
     state: present
   become: true
-  when: ansible_os_family == "Archlinux" and medium == "pacman"
-
+  
 - name: install latest version from AUR
-  block:
-    - name: clone package repo from AUR
-      git:
-        repo: "https://aur.archlinux.org/{{ package_name }}.git"
-        dest: "/tmp/{{ package_name }}"
-        update: true
-    
-    - name: build package
-      command: makepkg -s -f --noconfirm
-      args:
-        chdir: "/tmp/{{ package_name }}"
-    
-    - name: find the built package
-      find:
-        path: "/tmp/{{ package_name }}"
-        pattern: "*.pkg.tar.zst"
-      register: built_package
-      
-    - name: install package
-      pacman:
-        name: "{{ built_package.files[0].path }}"
-        state: present
-      become: true
   when: ansible_os_family == "Archlinux" and medium == "aur"
+  block:
+   - name: get AUR package info
+     uri:
+       url: "https://aur.archlinux.org/rpc/?v=5&type=info&arg={{ package_name }}"
+       return_content: true
+     register: aur_info
+     no_log: true
+   
+   - name: get installed package info
+     command: pacman -Q {{ package_name }}
+     register: installed_info
+     no_log: true
+
+   - name: set version variables
+     set_fact:
+       aur_version: "{{ aur_info.json.results[0].Version }}"
+       installed_version: "{{ installed_info.stdout.split()[1] }}"
+   
+   - name: install latest version
+     when: aur_version != installed_version
+     block:
+      - name: clone package repo from AUR
+        git:
+          repo: "https://aur.archlinux.org/{{ package_name }}.git"
+          dest: "/tmp/{{ package_name }}"
+          update: true
+      
+      - name: build package
+        command: makepkg -s -f --noconfirm
+        args:
+          chdir: "/tmp/{{ package_name }}"
+      
+      - name: find the built package
+        find:
+          path: "/tmp/{{ package_name }}"
+          pattern: "*.pkg.tar.zst"
+        register: built_package
+        
+      - name: install package
+        pacman:
+          name: "{{ built_package.files[0].path }}"
+          state: present
+        become: true
+  
