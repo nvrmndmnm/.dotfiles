@@ -6,6 +6,7 @@ default_roles:
   - alacritty
   - brave
   - btop
+  - discord
   - feh
   - firefox
   - flameshot
