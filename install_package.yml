@@ -8,7 +8,7 @@
 
 - name: install latest version from AUR
   block:
-    - name: clone package repo
+    - name: clone package repo from AUR
       git:
         repo: "https://aur.archlinux.org/{{ package_name }}.git"
         dest: "/tmp/{{ package_name }}"

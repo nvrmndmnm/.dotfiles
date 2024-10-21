@@ -1,11 +1,11 @@
 - name: setup arch linux
   hosts: battlestations
-  become: yes
+  become: true
   tasks:
     - name: update system
       pacman:
-        update_cache: yes
-        upgrade: yes
+        update_cache: true
+        upgrade: true
 
     - name: install essential packages
       pacman:
@@ -14,6 +14,15 @@
           - git
           - rsync
         state: present
+    
+    - name: install yay
+      include_tasks: install_package.yml
+      vars:
+        package_name: yay
+        medium: aur
+      args:
+        apply:
+          become: false
 
     - name: install fonts
       pacman:
