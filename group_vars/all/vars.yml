@@ -17,6 +17,7 @@ default_roles:
   - mpv
   - neovim
   - netctl
+  - obs-studio
   - p7zip
   - picom
   - plexmediaserver
