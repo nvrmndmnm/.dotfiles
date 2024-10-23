@@ -12,4 +12,4 @@
   include_tasks: ../../../set_config.yml
   args:
     apply:
-      become: yes
+      become: true
