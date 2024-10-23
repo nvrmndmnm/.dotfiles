@@ -33,7 +33,7 @@
     loop: "{{ old_config.results }}"
     loop_control:
       label: "{{ item.invocation.module_args.path }}"
-    when: item.stat.isreg | default(false)
+    when: item.stat.isreg | default(false) and backup | default(true)
   when: filtered_config_files | length > 0
 
 - name: create directory structure
@@ -59,6 +59,7 @@
   copy:
     src: "{{ item.path | replace(managed_home_path, control_home_path) }}"
     dest: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+    owner: "{{ owner | default('root') }}"
     mode: "{{ files_mode | default('0644') }}"
   loop: "{{ filtered_config_files }}"
   loop_control:
