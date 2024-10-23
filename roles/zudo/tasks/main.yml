@@ -1,0 +1,13 @@
+---
+- name: set role vars
+  set_fact:
+    config_path: "/usr/local/bin"
+    backup: false
+    files_mode: "0500"
+    owner: "{{ ansible_user }}"
+
+- name: set config
+  include_tasks: ../../../set_config.yml
+  args:
+    apply:
+      become: true
