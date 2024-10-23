@@ -33,7 +33,8 @@ default_roles:
 
 system_roles:
   - sys
-
+  - zudo
+  
 vault_roles:
   - ssh
 
