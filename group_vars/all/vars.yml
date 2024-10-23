@@ -12,6 +12,7 @@ default_roles:
   - firefox
   - flameshot
   - fzf
+  - go-ethereum
   - go-yq
   - i3-wm
   - mpv
