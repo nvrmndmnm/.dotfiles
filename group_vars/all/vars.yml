@@ -28,6 +28,7 @@ default_roles:
   - socat
   - telegram-desktop
   - tmux
+  - uxplay
   - websocat
   - wireguard
   - X
