@@ -1,0 +1,42 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.minimap.enabled": false,
+    "workbench.colorCustomizations": {
+       
+        "[Name of the Current Theme you are using]": {
+            "titleBar.activeBackground": "#191919cc",
+            "titleBar.activeForeground": "#191919cc",
+        },
+    },
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "solidity.telemetry": false,
+    "editor.detectIndentation": false,
+    "go.languageServerFlags": [
+        
+    ],
+    "telemetry.telemetryLevel": "off",
+    "extensions.ignoreRecommendations": true,
+    "git.openRepositoryInParentFolders": "never",
+    "continue.telemetryEnabled": false,
+    "diffEditor.codeLens": true,
+    "window.zoomLevel": 1,
+    "editor.fontSize": 12,
+    "editor.codeActionsOnSave": {
+        
+    },
+    "keyboard.dispatch": "keyCode",
+    "continue.enableTabAutocomplete": false,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.colorTheme": "Vim Dark Hard",
+    "protoc": {
+        "compile_on_save": false,
+        "clang-format.style": "google",
+    },
+    "editor.renderWhitespace": "all",
+    "window.menuBarVisibility": "compact",
+    "window.customTitleBarVisibility": "auto",
+    "sqltools.useNodeRuntime": true,
+}
