@@ -14,54 +14,59 @@
   set_fact:
     filtered_config_files: >-
       {{
-        config_list.files | selectattr('path', 'search', '/common/')
-        + config_list.files | selectattr('path', 'search', '/' + inventory_hostname + '/')
+        config_list.files | selectattr('path', 'search', '/common' + config_path.src | default(''))
+        + config_list.files | selectattr('path', 'search', '/' + inventory_hostname + config_path.src | default(''))
       }}
 
 - name: backup config files
   block:
   - name: check existing files
     stat:
-      path: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+      path: >-
+        {{
+         item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')'
+         + config_path.src | default(''), config_path.dest) 
+        }}
     loop: "{{ filtered_config_files }}"
     loop_control:
       label: "{{ item.path }}"
-    register: old_config
+    register: dest_config
 
   - name: move old files
-    command: mv {{ item.stat.path }} {{ item.stat.path }}.old
-    loop: "{{ old_config.results }}"
+    command: mv {{ file.stat.path }} {{ file.stat.path }}.old
+    loop: "{{ dest_config.results }}"
     loop_control:
-      label: "{{ item.invocation.module_args.path }}"
-    when: item.stat.isreg | default(false) and backup | default(true)
+      label: "{{ file.item.path }}"
+      loop_var: file
+    when: file.stat.isreg | default(false) and backup | default(true)
   when: filtered_config_files | length > 0
 
 - name: create directory structure
   file:
-    path: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) | dirname }}" 
+    path: "{{ item.invocation.module_args.path | dirname }}" 
     state: directory
     mode: "{{ dir_mode | default('0755')}}"
-  loop: "{{ filtered_config_files }}"
+  loop: "{{ dest_config.results }}"
   loop_control:
-    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) | dirname }}" 
+    label: "{{ item.invocation.module_args.path | dirname }}" 
 
 - name: create config symlinks
   file:
-    src: "{{ item.path }}"
-    dest: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+    src: "{{ item.item.path }}"
+    dest: "{{ item.invocation.module_args.path }}"
     state: link
-  loop: "{{ filtered_config_files }}"
+  loop: "{{ dest_config.results }}"
   loop_control:
-    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}" 
-  when: config_path is search(ansible_facts['user_dir'])
+    label: "{{ item.invocation.module_args.path }}" 
+  when: config_path.dest is search(ansible_facts['user_dir'])
 
 - name: copy config files
   copy:
-    src: "{{ item.path | replace(managed_home_path, control_home_path) }}"
-    dest: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}"
+    src: "{{ item.item.path }}"
+    dest: "{{ item.invocation.module_args.path }}"
     owner: "{{ owner | default('root') }}"
     mode: "{{ files_mode | default('0644') }}"
-  loop: "{{ filtered_config_files }}"
+  loop: "{{ dest_config.results}}"
   loop_control:
-    label: "{{ item.path | regex_replace('^' + ansible_files_path + '/(common|' + inventory_hostname + ')', config_path) }}" 
-  when: config_path is not search(ansible_facts['user_dir'])
+    label: "{{ item.invocation.module_args.path }}" 
+  when: config_path.dest is not search(ansible_facts['user_dir'])
