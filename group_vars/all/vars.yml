@@ -14,6 +14,7 @@ default_roles:
   - fzf
   - go-ethereum
   - go-yq
+  - gpu-screen-recorder
   - i3-wm
   - mpv
   - neovim
