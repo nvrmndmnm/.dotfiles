@@ -34,6 +34,9 @@ exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output e
 bindsym $mod+o exec python ~/.config/i3/scripts/monitor-switcher.py
 bindsym $mod+i exec xrandr --output eDP-1 --auto --primary
 
+# gpu-screen-recorder controls
+bindsym $mod+F4 exec killall -SIGUSR1 gpu-screen-recorder
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
