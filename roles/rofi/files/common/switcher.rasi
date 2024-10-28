@@ -3,7 +3,7 @@
  *******************************************************/
  
 configuration {
-    font:                           "NotoSansMono Nerd Font Regular 10";
+    font:                           "NotoSansMono Nerd Font Regular 12";
     show-icons:                     false;
     icon-theme: 					"Qogir";
     scroll-method:                  0;
@@ -21,7 +21,7 @@ window {
     border:                         0;
     padding:                        10;
     transparency:                   "real";
-    width:                          150px;
+    width:                          250px;
     location:                       center;
 /*y-offset:                       18;*/
 /*x-offset:	                    850;*/
