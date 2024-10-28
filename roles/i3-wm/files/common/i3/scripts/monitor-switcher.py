@@ -160,7 +160,7 @@ def rofi_cmd(title, nb_lines):
         "-i", 
         "-lines", str(nb_lines), 
         "-p", title, 
-        "-theme", "~/.config/rofi/monitor-switcher.rasi"
+        "-theme", "~/.config/rofi/switcher.rasi"
     ]
 
 def run_rofi(title, menu_dic):
@@ -191,11 +191,11 @@ def select_output(connected_outputs):
     for o in connected_outputs:
         menu_dic[output_display(o)] = o
 
-    return run_rofi("Select output", menu_dic)
+    return run_rofi("Select Video Output", menu_dic)
 
 
 def active_different_filter(candidate: Output, current: Output):
-    return candidate.name != selected_output.name and candidate.isActive == True
+    return candidate.name != current.name and candidate.isActive == True
 
 def select_enable_action(connected_outputs, selected_output):
     actions = [
