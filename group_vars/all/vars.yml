@@ -4,6 +4,7 @@ managed_home_path: "{{ ansible_facts['user_dir'] }}"
 
 default_roles:
   - alacritty
+  - betterlockscreen
   - bluez
   - brave
   - btop
