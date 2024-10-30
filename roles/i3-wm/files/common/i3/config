@@ -52,6 +52,9 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+# lock screen
+bindsym $mod+Escape exec ~/.config/i3/scripts/lock.sh
+
 # start a terminal
 bindsym $mod+Return exec alacritty
 
