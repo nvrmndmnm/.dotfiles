@@ -10,4 +10,6 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+xmodmap -e "remove Mod1 = BackSpace"
+
 xset r rate 333 25
