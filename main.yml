@@ -2,12 +2,6 @@
 - name: dotfiles config
   hosts: battlestations
 
-  pre_tasks:
-    - name: detect host user
-      import_tasks: pre_tasks/whoami.yml
-      tags:
-        - always
-
   tasks:
     - name: copy configs to remote
       synchronize:
