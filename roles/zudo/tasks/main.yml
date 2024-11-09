@@ -1,7 +1,8 @@
 ---
 - name: set role vars
   set_fact:
-    config_path: "/usr/local/bin"
+    config_path: 
+      dest: "/usr/local/bin"
     backup: false
     files_mode: "0500"
     owner: "{{ ansible_user }}"
