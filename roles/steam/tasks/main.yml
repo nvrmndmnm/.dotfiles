@@ -1,0 +1,10 @@
+---
+- name: set role vars
+  set_fact:
+    package_name: steam
+    medium: pacman
+    config_path:
+      dest: "{{ ansible_facts['user_dir'] }}/.steam"
+
+- name: install package
+  include_tasks: ../../../install_package.yml
