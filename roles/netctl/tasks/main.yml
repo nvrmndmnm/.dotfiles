@@ -3,7 +3,8 @@
   set_fact:
     package_name: netctl
     medium: pacman
-    config_path: "/etc/netctl"
+    config_path:
+      dest: "/etc/netctl"
     dir_mode: "0755"
     files_mode: "0600"
     

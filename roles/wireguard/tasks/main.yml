@@ -3,7 +3,8 @@
   set_fact:
     package_name: wireguard-tools 
     medium: pacman
-    config_path: "/etc/wireguard"
+    config_path:
+      dest: "/etc/wireguard"
     dir_mode: "0700"
     files_mode: "0600"
 
