@@ -3,7 +3,8 @@
   set_fact:
     package_name: plex-media-server
     medium: aur
-    config_path: "/etc/systemd/system"
+    config_path:
+      dest: "/etc/systemd/system"
 
 - name: install package
   include_tasks: ../../../install_package.yml

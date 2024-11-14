@@ -3,7 +3,8 @@
   set_fact:
     package_name: qbittorrent 
     medium: pacman
-    config_path: "{{ ansible_facts['user_dir'] }}/.config/qBittorrent"
+    config_path:
+      dest: "{{ ansible_facts['user_dir'] }}/.config/qBittorrent"
 
 - name: install package
   include_tasks: ../../../install_package.yml
