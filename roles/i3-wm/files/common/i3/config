@@ -54,6 +54,7 @@ tiling_drag modifier titlebar
 
 # lock screen
 bindsym $mod+Escape exec ~/.config/i3/scripts/lock.sh
+exec --no-startup-id xautolock -time 30 -locker ~/.config/i3/scripts/lock.sh
 
 # start a terminal
 bindsym $mod+Return exec alacritty
