@@ -31,6 +31,7 @@ default_roles:
   - socat
   - telegram-desktop
   - tmux
+  - usbutils
   - uxplay
   - vscode
   - websocat
