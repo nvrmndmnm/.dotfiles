@@ -62,7 +62,7 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-7/launcher.sh 
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/launcher.sh 
 bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/type-6/powermenu.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
