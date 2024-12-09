@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
-#
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
-
-# Current Theme
 dir="$HOME/.config/rofi/powermenu"
 theme='style'
 
 # CMDs
 lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+host=`hostnamectl hostname`
 
 # Options
 hibernate=''
@@ -32,7 +21,6 @@ no=''
 rofi_cmd() {
 	rofi -dmenu \
 		-p " $USER@$host" \
-		-mesg " Uptime: $uptime" \
 		-theme ${dir}/${theme}.rasi
 }
 
