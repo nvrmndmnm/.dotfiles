@@ -8,14 +8,14 @@ lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"
 host=`hostnamectl hostname`
 
 # Options
-hibernate=''
-shutdown=''
-reboot=''
-lock=''
-suspend=''
-logout=''
-yes=''
-no=''
+hibernate='\ue034'
+shutdown='\u23fb'
+reboot='\ue5d5'
+lock='\ue0da'
+suspend='\ue51c'
+logout='\ue9ba'
+yes='\ue5ca'
+no='\ue5cd'
 
 # Rofi CMD
 rofi_cmd() {
