@@ -39,4 +39,5 @@
     "window.menuBarVisibility": "compact",
     "window.customTitleBarVisibility": "auto",
     "sqltools.useNodeRuntime": true,
+    "editor.fontFamily": "'Droid Sans Mono', 'Material Design Icons', 'monospace', monospace",
 }
