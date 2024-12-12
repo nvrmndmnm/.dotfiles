@@ -32,9 +32,9 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
 
 # Switch them switches
-bindsym $mod+o exec python ~/.config/i3/scripts/monitor-switcher.py
+bindsym $mod+o exec python ~/.config/rofi/controls/monitor-switcher.py
 bindsym $mod+Shift+o exec xrandr --output eDP-1 --auto --primary
-bindsym $mod+i exec python ~/.config/i3/scripts/audio-switcher.py
+bindsym $mod+i exec python ~/.config/rofi/controls/audio-switcher.py
 
 # gpu-screen-recorder controls
 bindsym $mod+F4 exec killall -SIGUSR1 gpu-screen-recorder && notify-send "Saved replay"
