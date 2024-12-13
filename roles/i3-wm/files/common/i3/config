@@ -32,9 +32,11 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id xrandr --output HDMI-1-0 --auto --primary --output eDP-1 --auto --right-of HDMI-1-0
 
 # Switch them switches
-bindsym $mod+o exec python ~/.config/rofi/controls/monitor-switcher.py
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/controls/launcher.sh 
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/controls/power.sh
+bindsym $mod+o exec python ~/.config/rofi/controls/display.py
 bindsym $mod+Shift+o exec xrandr --output eDP-1 --auto --primary
-bindsym $mod+i exec python ~/.config/rofi/controls/audio-switcher.py
+bindsym $mod+i exec python ~/.config/rofi/controls/audio.py
 
 # gpu-screen-recorder controls
 bindsym $mod+F4 exec killall -SIGUSR1 gpu-screen-recorder && notify-send "Saved replay"
@@ -62,8 +64,6 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/launcher.sh 
-bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/powermenu.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
