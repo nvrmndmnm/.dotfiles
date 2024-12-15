@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dir="$HOME/.config/rofi/themes"
-theme='powermenu'
+theme='jinx/powermenu'
 
 # CMDs
 lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"

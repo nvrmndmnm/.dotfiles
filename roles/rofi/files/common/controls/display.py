@@ -160,7 +160,7 @@ def rofi_cmd(title, nb_lines):
         "-i", 
         "-lines", str(nb_lines), 
         "-p", title, 
-        "-theme", "~/.config/rofi/themes/displaymenu.rasi"
+        "-theme", "~/.config/rofi/themes/jinx/displaymenu.rasi"
     ]
 
 def run_rofi(title, menu_dic):
