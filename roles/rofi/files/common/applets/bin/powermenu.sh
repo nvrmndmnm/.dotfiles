@@ -1,12 +1,6 @@
-#!/usr/bin/env bash
+type="$HOME/.config/rofi/applets/type-5"
+style='style-1.rasi'
 
-## Author  : Aditya Shakya (adi1090x)
-## Github  : @adi1090x
-#
-## Applets : Power Menu
-
-# Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
 # Theme Elements
