@@ -1,19 +1,11 @@
-type="$HOME/.config/rofi/applets/type-5"
-style='style-1.rasi'
-
-theme="$type/$style"
+theme="$HOME/.config/rofi/applets/style.rasi"
 
 # Theme Elements
 prompt="`hostname`"
 mesg="Uptime : `uptime -p | sed -e 's/up //g'`"
 
-if [[ ( "$theme" == *'type-1'* ) || ( "$theme" == *'type-3'* ) || ( "$theme" == *'type-5'* ) ]]; then
-	list_col='1'
-	list_row='6'
-elif [[ ( "$theme" == *'type-2'* ) || ( "$theme" == *'type-4'* ) ]]; then
-	list_col='6'
-	list_row='1'
-fi
+list_col='1'
+list_row='6'
 
 # Options
 layout=`cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2`
