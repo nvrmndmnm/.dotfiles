@@ -47,7 +47,8 @@ def set_default_sink(sink_name):
     subprocess.run(["pactl", "set-default-sink", sink_name])
 
 def run_rofi(title, options):
-    rofi_command = ["rofi", "-dmenu", "-i", "-p", title, "-theme", "~/.config/rofi/applets/style.rasi"]
+    rofi_command = ["rofi", "-theme-str \"listview {{columns: 1; lines: 3;}}\"",
+                    "-dmenu", title, "-markup-rows", "-theme", "~/.config/rofi/themes/jinx/audiomenu.rasi"]
     input_text = "\n".join(options)
     result = subprocess.run(rofi_command, input=input_text, text=True, stdout=subprocess.PIPE)
     return result.stdout.strip()
