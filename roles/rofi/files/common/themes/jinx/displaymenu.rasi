@@ -103,7 +103,7 @@ textbox {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       9;
+    lines:                       8;
     cycle:                       true;
     scrollbar:                   false;
     layout:                      vertical;
@@ -111,6 +111,7 @@ listview {
     spacing:                     5px;
     background-color:            transparent;
     cursor:                      "default";
+    padding:                     50px 0px 0px 0px;
 }
 
 /*****----- Elements -----*****/
