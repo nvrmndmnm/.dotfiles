@@ -1,9 +1,5 @@
 theme="$HOME/.config/rofi/applets/style.rasi"
 
-# Theme Elements
-prompt="`hostname`"
-mesg="Uptime : `uptime -p | sed -e 's/up //g'`"
-
 list_col='1'
 list_row='6'
 
@@ -32,11 +28,7 @@ fi
 # Rofi CMD
 rofi_cmd() {
 	rofi -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-		-theme-str 'textbox-prompt-colon {str: "";}' \
 		-dmenu \
-		-p "$prompt" \
-		-mesg "$mesg" \
-		-markup-rows \
 		-theme ${theme}
 }
 
